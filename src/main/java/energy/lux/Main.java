@@ -25,13 +25,24 @@ public class Main {
             System.out.println("i = " + i);
         }
 
+        var factory = EsdlFactory.eINSTANCE;
+
         EnergySystem energySystem = EsdlFactory.eINSTANCE.createEnergySystem();
         energySystem.setName("My First EnergySystem");
         energySystem.setId("firstEnergySystem");
 
+        var instances = energySystem.getInstance();
+        var instance = factory.createInstance();
+        instances.add(instance);
+
         Area area = EsdlFactory.eINSTANCE.createArea();
+        instance.setArea(area);
         area.setId("Test");
         area.setName("Amsterdam municipality");
+
+        var pvInstallation = factory.createPVInstallation();
+        pvInstallation.setNumberOfPanels(42);
+        area.getAsset().add(pvInstallation);
 
         var measure = EsdlFactory.eINSTANCE.createMeasure();
         var measures = EsdlFactory.eINSTANCE.createMeasures();
